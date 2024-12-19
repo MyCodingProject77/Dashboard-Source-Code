@@ -1,0 +1,71 @@
+
+ using Mysql.Data.MysqlClient;
+
+          private void Dashboard_Load(object sender, EventArgs e)
+        {
+            Display1();
+            Display2();
+        }
+
+        private void Display1()
+        {
+            string connectionString = "Server=127.0.0.1;Database=collegedb;Uid=root;Pwd=Msixyz7777@;";
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    // Open the connection
+                    connection.Open();
+
+                    // SQL query to count rows in the table
+                    string query = "SELECT COUNT(*) FROM students";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        // Execute the query and get the result
+                        int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                        // Display the count in the label
+                        lblCount1.Text = "Total Students: " + count.ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+        }
+
+
+
+
+        private void Display2()
+        {
+            string connectionString = "Server=127.0.0.1;Database=collegedb;Uid=root;Pwd=Msixyz7777@;";
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    // Open the connection
+                    connection.Open();
+
+                    // SQL query to count rows in the table
+                    string query = "SELECT COUNT(*) FROM courses";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        // Execute the query and get the result
+                        int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                        // Display the count in the label
+                        lblCount2.Text = "Total Courses: " + count.ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+        }
+    }
+}
